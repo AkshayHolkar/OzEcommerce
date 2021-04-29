@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Presonal Info";
+}
+@model OzEcommerceV14.Models.Account
+<!-- section start -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="checkout-page">
+            <div class="checkout-form">
+                <form method="post" asp-controller="Order" asp-action="PersonalInfo"
+                    class="needs-validation add-product-form" novalidate="" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="checkout-title">
+                                <h3>Personal Details</h3>
+                            </div>
+                            <div class="row check-out">
+                                @if (Model != null)
+                                {
+                                    <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                        <div class="field-label">Full Name</div>
+                                        <input asp-for="FullName" type="text" name="FullName" id="FullName"
+                                        value="@Model.FullName" placeholder="">
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <div class="field-label">Phone</div>
+                                        <input asp-for="Phone" type="text" name="Phone" id="Phone" value="@Model.Phone"
+                                        placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <div class="field-label">Email Address</div>
+                                        <input asp-for="Email" type="text" name="Email" id="Email" value="@Model.Email"
+                                        placeholder="">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                        <div class="field-label">Full Name</div>
+                                        <input asp-for="FullName" type="text" name="FullName" id="FullName" value=""
+                                        placeholder="">
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <div class="field-label">Phone</div>
+                                        <input asp-for="Phone" type="text" name="Phone" id="Phone" value="" placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                        <div class="field-label">Email Address</div>
+                                        <input asp-for="Email" type="text" name="Email" id="Email" value="" placeholder="">
+                                    </div>
+                                }
+                                <button type="submit" value="PersonalInfo" class="btn btn-solid">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->

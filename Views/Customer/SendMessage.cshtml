@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_CustomerLayout.cshtml";
+}
+@model OzEcommerceV14.Models.Message
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Message
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item active">Send Message</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="post" asp-controller="Customer" asp-action="SendMessage" class="theme-form">
+                <div class="col-md-12">
+                    <label for="OrderId">Order Id: </label>
+                    <label for="OrderId"><strong>@Model.OrderId</strong></label>
+                </div>
+                <div class="col-md-12">
+                    <label for="Title">Title</label>
+                    <input asp-for="Title" type="text" class="form-control" id="Title" name="Title"
+                        placeholder="Enter your Subject heading" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="Body">Body</label>
+                    <textarea asp-for="Body" class="form-control" placeholder="Wrire Your Message Here" id="Body"
+                        name="Body" rows="6"></textarea>
+                </div>
+                <input type="hidden" asp-for="OrderId" name="orderId" id="orderId" value="@Model.OrderId" />
+
+                <div class="col-md-12">
+                    <br />
+                    <button class="btn btn-solid" style="background-color:red" type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

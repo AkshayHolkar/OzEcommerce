@@ -1,0 +1,157 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_CustomerLayout.cshtml";
+}
+@model OzEcommerceV14.Models.ViewModels.OrderViewModels.OrderSuccessViewModel
+
+<div class="page-body">
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header-left">
+                        <h3>
+                            Profile
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <ol class="breadcrumb pull-right">
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-4 col-md-6 xl-50">
+                <div class="card o-hidden widget-cards">
+                    <div class="bg-warning card-body">
+                        <div class="media static-top-widget row">
+                            <div class="icons-widgets col-4">
+                                <div class="align-self-center text-center"><i data-feather="navigation"
+                                        class="font-warning"></i>
+                                </div>
+                            </div>
+                            <div class="media-body col-8">
+                                <span class="m-0">Unread Messages</span>
+                                <h3 class="mb-0"><span class="counter">@ViewBag.Messages</span></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="profile-details text-center">
+                            @if (Model.Account != null)
+                            {
+
+                                <h5 class="f-w-600 mb-0">@Model.Account.FullName</h5>
+                                <span>@Model.Account.Email</span>
+                            }
+                            else
+                            {
+                            }
+                        </div>
+
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="card tab2-card">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="top-profile-tab" data-toggle="tab" href="#top-profile"
+                                    role="tab" aria-controls="top-profile" aria-selected="true"><i data-feather="user"
+                                        class="mr-2"></i>Profile</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="top-tabContent">
+                            <div class="tab-pane fade show active" id="top-profile" role="tabpanel"
+                                aria-labelledby="top-profile-tab">
+                                <h5 class="f-w-600">Profile</h5>
+                                <div class="table-responsive profile-table">
+                                    <table class="table table-responsive">
+                                        <tbody>
+                                            @if (Model.Account != null)
+                                            {
+                                                <tr>
+                                                    <td>Full Name:</td>
+                                                    <td>@Model.Account.FullName</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Email:</td>
+                                                    <td>@Model.Account.Email</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Contact Number:</td>
+                                                    <td>@Model.Account.Phone</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a asp-area="" asp-controller="Customer" asp-action="EditAccount"
+                                                        class="btn btn-classic">Edit Detail</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a asp-area="" asp-controller="Customer" asp-action="AddAccount"
+                                                        class="btn btn-classic">Add detail</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            @if (Model.Address != null)
+                                            {
+                                                <tr>
+                                                    <td>Shipping Address:</td>
+                                                    <td>
+                                                        @Model.Address.Property <br />
+                                                        @Model.Address.StreetName <br />
+                                                        @Model.Address.City @Model.Address.Postcode <br />
+                                                        @Model.Address.State @Model.Address.Country
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a asp-area="" asp-controller="Customer" asp-action="EditAddress"
+                                                        class="btn btn-classic">Edit Address</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a asp-area="" asp-controller="Customer" asp-action="AddAddress"
+                                                        class="btn btn-classic">Add Address</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+</div>

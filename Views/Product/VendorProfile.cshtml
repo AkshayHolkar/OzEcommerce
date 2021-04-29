@@ -1,0 +1,258 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model OzEcommerceV14.Models.ViewModels.HomeViewModel
+<!-- vendor cover start -->
+<div class="vendor-cover">
+    <div>
+        <img src="~/storeimages/@ViewBag.storeInfo.Banner" alt="" class="bg-img lazyload blur-up">
+    </div>
+</div>
+<!-- vendor cover end -->
+<!-- section start -->
+<section class="vendor-profile pt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="profile-left">
+                    <div class="profile-image">
+                        <div>
+                            <img src="~/storeimages/@ViewBag.storeInfo.Logo" alt="" class="img-fluid">
+                            <h3>@ViewBag.storeInfo.StoreName</h3>
+                            <h4>@ViewBag.storeInfo.TagLine</h4>
+                            <div>
+                                @{double j = 5 - ViewBag.AvgRating;
+                                }
+                                @for (double i = 1; i <= ViewBag.AvgRating; i++)
+                                {
+                                    <i class="fa fa-star" style="color:orange"></i>
+                                }
+                                @for (double k = 1; k <= j; k++)
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                            </div>
+                            <h6>@ViewBag.TotalReview review</h6>
+                        </div>
+                    </div>
+                    <div class="profile-detail">
+                        <div>
+                            <p>
+                                @ViewBag.storeInfo.Description
+                            </p>
+                        </div>
+                    </div>
+                    <div class="vendor-contact">
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+<!-- product-tab starts -->
+<section class="tab-product m-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" id="top-home-tab" data-toggle="tab"
+                           href="#top-home" role="tab" aria-selected="true">Products</a>
+                        <div class="material-border"></div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="review-top-tab" data-toggle="tab"
+                           href="#top-review" role="tab" aria-selected="false">Recommonded Combos</a>
+                        <div class="material-border"></div>
+                    </li>
+                </ul>
+                <div class="tab-content nav-material" id="top-tabContent">
+                    <div class="tab-pane fade show active" id="top-home" role="tabpanel"
+                         aria-labelledby="top-home-tab">
+                        <section class="section-b-space ratio_asos">
+                            <div class="collection-wrapper">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="collection-content col">
+                                            <div class="page-main-content">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="collection-product-wrapper">
+                                                            <div class="product-top-filter">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="product-filter-content">
+                                                                            <div class="search-count">
+                                                                                <h5>All Products</h5>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="product-wrapper-grid product-load-more">
+                                                                <div class="row">
+                                                                    @foreach (var product in Model.Products)
+                                                                    {
+                                                                        <div class="col-xl-3 col-md-6 col-grid-box">
+                                                                            <div class="product-box">
+                                                                                <div class="img-wrapper">
+                                                                                    <div class="front">
+                                                                                        <a asp-controller="product" asp-action="detail" asp-route-id="@product.Product.Id">
+                                                                                            <img src="~/productimages/@product.MainImage"
+                                                                                                 class="img-fluid blur-up lazyload bg-img"
+                                                                                                 alt="">
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="back">
+                                                                                        <a asp-controller="product" asp-action="detail" asp-route-id="@product.Product.Id">
+                                                                                            <img src="~/productimages//@product.SecondImage"
+                                                                                                 class="img-fluid blur-up lazyload bg-img"
+                                                                                                 alt="">
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="product-detail">
+                                                                                    <div>
+                                                                                        <div>
+                                                                                            @{double z = 5 - product.AvgRating;
+                                                                                            }
+                                                                                            @for (double i = 1; i <= product.AvgRating; i++)
+                                                                                            {
+                                                                                                <i class="fa fa-star" style="color:orange"></i>
+                                                                                            }
+                                                                                            @for (double k = 1; k <= z; k++)
+                                                                                            {
+                                                                                                <i class="fa fa-star"></i>
+                                                                                            }
+                                                                                        </div>
+                                                                                        <a asp-controller="product" asp-action="detail" asp-route-id="@product.Product.Id">
+                                                                                            <h6>@product.Product.Name</h6>
+                                                                                        </a>
+                                                                                        <p>
+                                                                                            @product.Product.Description
+                                                                                        </p>
+                                                                                        <h4>$@product.Product.Price</h4>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="load-more-sec">
+                                                                <a href="javascript:void(0)" class="loadMore">
+                                                                    load
+                                                                    more
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- section End -->
+                    </div>
+                    <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
+                        <section class="section-b-space ratio_asos">
+                            <div class="collection-wrapper">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="collection-content col">
+                                            <div class="page-main-content">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="collection-product-wrapper">
+                                                            <div class="product-top-filter">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="product-filter-content">
+                                                                            <div class="search-count">
+                                                                                <h5>All Deals</h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="product-wrapper-grid product-load-more">
+                                                                <div class="row">
+                                                                    @foreach (var combo in Model.Combo)
+                                                                    {
+                                                                        <form method="post" asp-controller="cart" asp-action="AddBundle">
+
+                                                                            <div class="col-xl-4 col-md-6 col-grid-box">
+                                                                                <div class="bundle">
+                                                                                    <div class="bundle_img">
+                                                                                        @{
+                                                                                            int count = combo.Combo.Count();
+                                                                                        }
+                                                                                        @foreach (var product in combo.Combo)
+                                                                                        {
+                                                                                            <div class="img-box">
+                                                                                                <a asp-controller="product" asp-action="detail" asp-route-id="@product.ProductId">
+                                                                                                    <img src="~/productimages/@product.Image" alt=""
+                                                                                                         class="img-fluid blur-up lazyload">
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            count--;
+                                                                                            @if (count > 0)
+                                                                                            {
+                                                                                                <span class="plus">+</span>
+                                                                                            }
+                                                                                        }
+                                                                                    </div>
+                                                                                    <div class="bundle_detail">
+                                                                                        <div class="theme_checkbox">
+                                                                                            @foreach (var product in combo.Combo)
+                                                                                            {
+                                                                                                <label>
+                                                                                                    @product.Name <span class="price_product">$@product.Price</span>
+                                                                                                </label>
+                                                                                            }
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <h4><del>$@combo.Total</del></h4>
+                                                                                    <h3>$@combo.DiscountTotal</h3>
+                                                                                    <input type="hidden" name="Id" value="@combo.ComboId" />
+
+                                                                                    <button class="btn btn-solid btn-xs" type="submit">buy this bundle</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <div class="load-more-sec">
+                                                                <a href="javascript:void(0)" class="loadMore">
+                                                                    load
+                                                                    more
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- section End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product-tab ends -->

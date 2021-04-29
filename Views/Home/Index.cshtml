@@ -1,0 +1,267 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model OzEcommerceV14.Models.ViewModels.HomeViewModel
+
+<partial name="../Components/Home/SlideShow/Index" />
+<!-- Paragraph-->
+<div class="title1 section-t-space">
+    <h2 class="title-inner1">New Arrivals</h2>
+</div>
+<!-- Paragraph end -->
+<!-- Product slider -->
+<section class="section-b-space p-t-0 ratio_asos">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="product-4 product-m no-arrow">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="product-box">
+                            <div class="img-wrapper">
+                                <div class="front">
+                                    <a asp-controller="product" asp-action="detail" asp-route-id="@product.Product.Id">
+                                        <img src="~/productimages/@product.MainImage"
+                                        class="img-fluid blur-up lazyload bg-img" alt="">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a asp-controller="product" asp-action="detail" asp-route-id="@product.Product.Id">
+                                        <img src="~/productimages/@product.SecondImage"
+                                        class="img-fluid blur-up lazyload bg-img" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-detail">
+                                <div>
+                                    @{
+                                        double j = 5 - product.AvgRating;
+                                    }
+                                    @for (double i = 1; i <= product.AvgRating; i++)
+                                    {
+                                        <i class="fa fa-star" style="color:orange"></i>
+                                    }
+                                    @for (double k = 1; k <= j; k++)
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                </div>
+                                <a asp-controller="product" asp-action="detail" asp-route-pro="@product.Product">
+                                    <h6>@product.Product.Name</h6>
+                                </a>
+                                <h4>$@product.Product.Price</h4>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product slider end -->
+<!-- collection banner -->
+<section class="banner-goggles ratio2_3 light-layout" style="margin-bottom:2%">
+    <div class="title1 section-t-space">
+        <h4>Recommendated Deals</h4>
+        <h2 class="title-inner1">LifeStyle base Categories </h2>
+    </div>
+    <div class="container-fluid">
+        <div class="row partition3" style="margin-bottom:2%">
+            <div class="col-md-4">
+                <a asp-controller="product" asp-action="RFilter" asp-route-id="1" asp-route-comboId="0">
+                    <div class="collection-banner">
+                        <div class="img-part">
+                            <img src="~/slidersimages/Traveller.jpg" class="img-fluid blur-up lazyload bg-img" alt="">
+                        </div>
+                        <div class="contain-banner banner-3">
+                            <div>
+                                <h4>For holiday, camping, packbacker</h4>
+                                <h2 style="color:blue">Traveller</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a asp-controller="product" asp-action="RFilter" asp-route-id="2" asp-route-comboId="0">
+                    <div class="collection-banner">
+                        <div class="img-part">
+                            <img src="~/slidersimages/freelance.jpg" class="img-fluid blur-up lazyload bg-img" alt="">
+                        </div>
+                        <div class="contain-banner banner-3">
+                            <div>
+                                <h4>Work from home, Startups</h4>
+                                <h2 style="color:blue">Freelancer</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a asp-controller="product" asp-action="RFilter" asp-route-id="4" asp-route-comboId="0">
+                    <div class="collection-banner">
+                        <div class="img-part">
+                            <img src="~/slidersimages/Vlog1.jpg" class="img-fluid blur-up lazyload bg-img" alt="">
+                        </div>
+                        <div class="contain-banner banner-3">
+                            <div>
+                                <h4>For YouTuber, Video Maker</h4>
+                                <h2 style="color:blue">Vlog</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row partition3">
+            <div class="col-md-4">
+                <a asp-controller="product" asp-action="RFilter" asp-route-id="5" asp-route-comboId="0">
+                    <div class="collection-banner">
+                        <div class="img-part">
+                            <img src="~/slidersimages/gamer.jpg" class="img-fluid blur-up lazyload bg-img" alt="">
+                        </div>
+                        <div class="contain-banner banner-3">
+                            <div>
+                                <h4></h4>
+                                <h2 style="color:blue">Gamer</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a asp-controller="product" asp-action="RFilter" asp-route-id="6" asp-route-comboId="0">
+                    <div class="collection-banner">
+                        <div class="img-part">
+                            <img src="~/slidersimages/music.png" class="img-fluid blur-up lazyload bg-img" alt="">
+                        </div>
+                        <div class="contain-banner banner-3">
+                            <div>
+                                <h4>Music instruments, Stands, other accessories</h4>
+                                <h2 style="color:blue">Musicians</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- collection banner end -->
+@*<partial name="../Components/Home/Banner/Parallax" />*@
+@*<partial name="../Components/Home/SlideShow/Product" />*@
+<!-- Tab product -->
+<div class="title1 section-t-space">
+    <h4>exclusive products</h4>
+    <h2 class="title-inner1">special products</h2>
+</div>
+<section class="section-b-space p-t-0 ratio_asos">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="theme-tab">
+                    <ul class="tabs tab-title">
+                        <li class="current"><a href="tab-4">Best Sellers</a></li>
+                        <li class=""><a href="tab-5">New Products</a></li>
+                    </ul>
+                    <div class="tab-content-cls">
+                        <div id="tab-4" class="tab-content active default">
+                            <div class="no-slider row">
+                                @foreach (var product in Model.TopSelling)
+                                {
+                                    <div class="product-box">
+                                        <div class="img-wrapper">
+                                            <div class="front">
+                                                <a asp-controller="product" asp-action="detail"
+                                                asp-route-id="@product.Product.Id">
+                                                    <img src="~/productimages/@product.MainImage"
+                                                    class="img-fluid blur-up lazyload bg-img" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="back">
+                                                <a asp-controller="product" asp-action="detail"
+                                                asp-route-id="@product.Product.Id">
+                                                    <img src="~/productimages/@product.SecondImage"
+                                                    class="img-fluid blur-up lazyload bg-img" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-detail">
+                                            <div>
+                                                @{
+                                                    double j = 5 - product.AvgRating;
+                                                }
+                                                @for (double i = 1; i <= product.AvgRating; i++)
+                                                {
+                                                    <i class="fa fa-star" style="color:orange"></i>
+
+                                                }
+                                                @for (double k = 1; k <= j; k++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+
+                                                }
+                                            </div>
+                                            <a asp-controller="product" asp-action="detail"
+                                            asp-route-pro="@product.Product">
+                                                <h6>@product.Product.Name</h6>
+                                            </a>
+                                            <h4>$@product.Product.Price</h4>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div id="tab-5" class="tab-content">
+                            <div class="no-slider row">
+                                @foreach (var product in Model.Products)
+                                {
+                                    <div class="product-box">
+                                        <div class="img-wrapper">
+                                            <div class="front">
+                                                <a asp-controller="product" asp-action="detail"
+                                                asp-route-id="@product.Product.Id">
+                                                    <img src="~/productimages/@product.MainImage"
+                                                    class="img-fluid blur-up lazyload bg-img" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="back">
+                                                <a asp-controller="product" asp-action="detail"
+                                                asp-route-id="@product.Product.Id">
+                                                    <img src="~/productimages/@product.SecondImage"
+                                                    class="img-fluid blur-up lazyload bg-img" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-detail">
+                                            <div>
+                                                @{
+                                                    double j = 5 - product.AvgRating;
+                                                }
+                                                @for (double i = 1; i <= product.AvgRating; i++)
+                                                {
+                                                    <i class="fa fa-star" style="color:orange"></i>
+                                                }
+                                                @for (double k = 1; k <= j; k++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                            </div>
+                                            <a asp-controller="product" asp-action="detail"
+                                            asp-route-pro="@product.Product">
+                                                <h6>@product.Product.Name</h6>
+                                            </a>
+                                            <h4>$@product.Product.Price</h4>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Tab product end -->

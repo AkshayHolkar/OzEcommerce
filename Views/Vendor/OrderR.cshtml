@@ -1,0 +1,92 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_VendorLayout.cshtml";
+
+}
+@model OzEcommerceV14.Models.ViewModels.VendorViewModel.VendorOrderViewModel
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Orders
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item active">Order</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card-body">
+                <div class="user-status table-responsive latest-order-table">
+                    <table class="table table-bordernone">
+                        <thead>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in  Model.OrderList)
+                            {
+                                <tr>
+                                    <td><a asp-controller="Vendor" asp-action="OrderDetailV" asp-route-id="@order.OrderId">@order.OrderId</a></td>
+                                    <td class="date">@order.Date.ToShortDateString()</td>
+                                    <td class="font-danger">@order.Name </td>
+                                    <td class="digits">
+                                        <form method="post" asp-controller="vendor" asp-action="updatestatus">
+                                            <select asp-for="@order.StatusId" id="StatusId" name="StatusId"
+                                                    asp-items="@ViewBag.Status" class="form-control digits col-xl-8 col-sm-7">
+                                            </select>
+                                            <button class="btn" type="submit"><i class="ti-save"></i></button>
+                                            <input type="hidden" name="Id" id="Id" value="@order.OrderId" />
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                            @*<tr>
+                                    <td>2</td>
+                                    <td class="digits">$90.00</td>
+                                    <td class="font-secondary">Ewallets</td>
+                                    <td class="digits">Delivered</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td class="digits">$240.00</td>
+                                    <td class="font-warning">Cash</td>
+                                    <td class="digits">Delivered</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td class="digits">$120.00</td>
+                                    <td class="font-primary">Direct Deposit</td>
+                                    <td class="digits">$6523</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td class="digits">$50.00</td>
+                                    <td class="font-primary">Bank Transfers</td>
+                                    <td class="digits">Delivered</td>
+                                </tr>*@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

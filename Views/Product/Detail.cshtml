@@ -1,0 +1,252 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Detail";
+
+    ViewBag.discount = Convert.ToDouble(Model.ProductPrice) - (Convert.ToDouble(Model.ProductPrice) * (Convert.ToDouble(Model.DiscountOnMulti) / 100));
+    ViewBag.combo = Convert.ToDouble(Model.ProductPrice) - (Convert.ToDouble(Model.ProductPrice) * (Convert.ToDouble(Model.DiscountInCombo) / 100));
+    string MainImage = Model.FImage;
+    string defaultColor="";
+
+}
+
+@model OzEcommerceV14.Models.ViewModels.ProductDetailViewModel
+<!-- section start -->
+<section>
+    <div class="collection-wrapper">
+        <div class="container">
+            <form method="post" asp-controller="Cart" asp-action="AddCart" class="needs-validation add-product-form" novalidate="" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-1 col-sm-2 col-xs-12">
+                        <div class="row">
+                            <div class="col-12 p-0">
+                                <div class="slider-right-nav">
+                                    @foreach (var image in Model.Images)
+                                    {
+                                        <div>
+                                            <img src="~/productimages/@image" alt=""
+                                                 class="img-fluid blur-up lazyload">
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-sm-10 col-xs-12 order-up">
+                        <div class="product-right-slick">
+                            @foreach (var image in Model.Images)
+                            {
+                                <div>
+                                    <img src="~/productimages/@image" alt=""
+                                         class="img-fluid blur-up lazyload image_zoom_cls-0">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-6 rtl-text">
+                        <div class="product-right">
+                            <h2>@Model.ProductName</h2>
+                            <h3>$@Model.ProductPrice</h3>
+                            <h4><del>$@Model.ProductPrice</del><span>Buy more than one and get @Model.DiscountOnMulti% off</span></h4>
+                            <h3>$@ViewBag.discount</h3>
+                            <h4><del>$@Model.ProductPrice</del><span>Buy in combo and get @Model.DiscountInCombo% off</span></h4>
+                            <h3>$@ViewBag.combo*</h3>
+                            <h5>Sell by <a asp-controller="product" asp-action="vendorprofile" asp-route-id="@Model.ProductVendorId"> @Model.storeName</a></h5>
+                            <p>*for combo price need to buy more than one item from same seller</p>
+
+                            <div class="product-description border-product">
+                                @if (Model.Colours != null)
+                                {
+                                <ul class="color-variant">
+                                    @foreach (var color in Model.Colours)
+                                    {
+                                        defaultColor = @color.Color;
+                                        <li style="background-color: @color.Color"><input asp-for="SelectedColor" type="checkbox" value="@color.Color"> </li>
+                                    }
+                                </ul>
+                                }
+                                @if (Model.ProductSize != null)
+                                {
+                                <h6 class="product-title">Size</h6>
+                                <select asp-for="SelectedSize"
+                                        asp-items="Model.ProductSize" class="form-control digits col-xl-8 col-sm-7">
+                                </select>
+                                }
+                                <h6 class="product-title">quantity</h6>
+                                <div class="qty-box">
+                                    <div class="input-group">
+                                        @if (Model.ProductQuantity > 0)
+                                        {
+                                            <input asp-for="Quantity" type="number" name="quantity" class="form-control input-number" value="1" min="1" max="@Model.ProductQuantity">
+                                        }
+                                        else
+                                        {
+                                            <label style="color:red">Out off Stock</label>
+                                        }
+                                    </div>
+                                </div>
+                                <input asp-for="ProductId" type="number" name="productId" class="form-control input-number" value="@Model.Id" hidden>
+                                <input asp-for="Name" type="text" name="Name" class="form-control" value="@Model.ProductName" hidden>
+                                <input asp-for="Price" type="number" name="Price" class="form-control" value="@Model.ProductPrice" hidden>
+                                <input asp-for="MaxLimit" type="number" name="MaxLimit" class="form-control" value="@Model.ProductQuantity" hidden>
+                                <input asp-for="FImage" type="text" name="FImage" class="form-control" value="@MainImage" hidden>
+                                <input asp-for="DiscountPrice" type="number" name="DiscountPrice" class="form-control" value="@ViewBag.discount" hidden>
+                                <input asp-for="ComboPrice" type="number" name="ComboPrice" class="form-control" value="@ViewBag.combo" hidden>
+                                <input asp-for="DefaultColor" type="text" name="DefaultColor" class="form-control" value="@defaultColor" hidden>
+                                <input asp-for="VendorId" type="text" name="vendorId" class="form-control" value="@Model.ProductVendorId" hidden>
+                            </div>
+                            @if (Model.ProductQuantity > 0)
+                            {
+                                <div class="product-buttons">
+                                    <button type="submit" value="AddCart"
+                                            class="btn btn-solid">
+                                        add to cart
+                                    </button>
+                                </div>
+                            }
+                            <div class="border-product">
+                                <h6 class="product-title">product details</h6>
+                                <p>
+                                    @Model.ProductDescription
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-body row">
+            <div class="col-md-6">
+                <!-- Your first column here -->
+            </div>
+            <div class="col-md-6">
+                <form method="post" asp-controller="cart" asp-action="AddBundle">
+                    @if (Model.Total > 0)
+                    {
+                        <div class="border-product">
+                            <div class="bundle">
+                                <div class="bundle_img">
+                                    @{
+                                        int count = Model.Combo.Count();
+                                    }
+                                    @foreach (var combo in Model.Combo)
+                                    {
+                                        <div class="img-box">
+                                            <a asp-controller="product" asp-action="detail" asp-route-id="@combo.ProductId">
+                                                <img src="~/productimages/@combo.Image" alt=""
+                                                     class="img-fluid blur-up lazyload">
+                                            </a>
+                                        </div>
+                                        count--;
+                                        @if (count > 0)
+                                        {
+                                            <span class="plus">+</span>
+                                        }
+                                    }
+                                </div>
+                                <div class="bundle_detail">
+                                    <div class="theme_checkbox">
+                                        @foreach (var combo in Model.Combo)
+                                        {
+                                            <label>
+                                                @combo.Name <span class="price_product">$@combo.Price</span>
+                                            </label>
+                                        }
+                                        <h4><del>$@Model.Total</del></h4>
+                                        <h3>$@Model.DiscountTotal</h3>
+                                        <input type="hidden" name="Id" value="@Model.ComboId" />
+                                        <button class="btn btn-solid btn-xs" type="submit">buy this bundle</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+<!-- product-tab starts -->
+<section class="tab-product m-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" id="contact-top-tab" data-toggle="tab"
+                           href="#top-contact" role="tab" aria-selected="false">Video</a>
+                        <div class="material-border"></div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-top-tab" data-toggle="tab"
+                           href="#top-profile" role="tab" aria-selected="false">Warranty</a>
+                        <div class="material-border"></div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="review-top-tab" data-toggle="tab"
+                           href="#top-review" role="tab" aria-selected="false">Review</a>
+                        <div class="material-border"></div>
+                    </li>
+                </ul>
+                <div class="tab-content nav-material" id="top-tabContent">
+
+                    <div class="tab-pane fade show active" id="top-home" role="tabpanel"
+                         aria-labelledby="top-home-tab">
+                        <div class="mt-4 text-center">
+                            <iframe width="560" height="315" src="@Model.Video"
+                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
+                        <div class="single-product-tables">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Warranty Period</td>
+                                        <td>@Model.warranty months</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
+                        <div class="form-row">
+                            @if (Model.reviews.Count != 0)
+                            {
+                                @foreach (var review in Model.reviews)
+                                {
+                                    <div class="col-md-12">
+                                        <div>
+                                            @{int j = 5 - review.Review.Rating;
+                                            }
+                                            @for (int i = 1; i <= review.Review.Rating; i++)
+                                            {
+                                                <i class="fa fa-star" style="color:orange"></i>
+                                            }
+                                            @for (int k = 1; k <= j; k++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                        </div>
+                                        <h5>Title: @review.Review.Title (By @review.CustomerName)</h5>
+                                        <h6><b>Review: </b>@review.Review.Detail</h6>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="col-md-12">
+                                   <h5>No review</h5>                                                
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product-tab ends -->

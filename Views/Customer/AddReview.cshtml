@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_CustomerLayout.cshtml";
+}
+@model OzEcommerceV14.Models.Product
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Review
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item active">Give Review</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="post" asp-controller="Customer" asp-action="Review" class="theme-form">
+                <div class="col-md-12">
+                    <h5>Please Give Rating between 0-5:</h5>
+                    <input id="rate" name="rate" value="0" type="number" class="rating" data-symbol="*" min=0 max=5
+                        step=1 data-size="xl">
+                    @*<div class="media">
+                        <label>Rating</label>
+                        <div class="media-body ml-3">
+                        <div class="rating three-star">
+                        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa
+                        fa-star"></i> <i class="fa fa-star"></i>
+                        </div>
+                        </div>
+                        </div>*@
+                </div>
+
+                <div class="col-md-12">
+                    <label for="review">Review Title</label>
+                    <input type="text" class="form-control" id="rTitle" name="rTitle"
+                        placeholder="Enter your Review Subjects" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="review">Review</label>
+                    <textarea class="form-control" placeholder="Wrire Your Review Here" id="review" name="review"
+                        rows="6"></textarea>
+                </div>
+                <input type="hidden" name="productId" id="productId" value="@Model.Id" />
+                <input type="hidden" name="vendorId" id="vendorId" value="@Model.VendorId" />
+
+                <div class="col-md-12"><br />
+                    <button class="btn btn-solid" style="background-color:red" type="submit">Submit Your Review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Combo Recommondations";
+}
+@model OzEcommerceV14.Models.ViewModels.ComboSetViewModel
+
+<section class="section-b-space ratio_asos">
+    <div class="collection-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="collection-content col">
+                    <div class="page-main-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="collection-product-wrapper">
+                                    <div class="product-top-filter">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="popup-filter">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                            Filter by LifeStyle
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            @foreach (var category in ViewBag.categories)
+                                                            {
+                                                                <a class="dropdown-item" asp-controller="product" asp-action="CFilter" asp-route-id="@category.Id" asp-route-comboId="@Model.LifeStyleId">@category.Name</a>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-wrapper-grid product-load-more">
+                                        <div class="row">
+                                            @foreach (var combo in Model.comboSet)
+                                            {
+                                                <form method="post" asp-controller="cart" asp-action="AddBundle">
+
+                                                    <div class="col-xl-4 col-md-6 col-grid-box">
+                                                        <div class="bundle">
+                                                            <div class="bundle_img">
+                                                                @{
+                                                                    int count = combo.Combo.Count();
+                                                                }
+                                                                @foreach (var product in combo.Combo)
+                                                                {
+
+                                                                    <div class="img-box">
+                                                                        <a asp-controller="product" asp-action="detail" asp-route-id="@product.ProductId">
+                                                                            <img src="~/productimages/@product.Image" alt=""
+                                                                                 class="img-fluid blur-up lazyload">
+                                                                        </a>
+                                                                    </div>
+                                                                    count--;
+                                                                    @if (count > 0)
+                                                                    {
+                                                                        <span class="plus">+</span>
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <div class="bundle_detail">
+                                                                <div class="theme_checkbox">
+                                                                    @foreach (var product in combo.Combo)
+                                                                    {
+                                                                        <label>
+                                                                            @product.Name <span class="price_product">$@product.Price</span>
+                                                                        </label>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                            <h4><del>$@combo.Total</del></h4>
+                                                            <h3>$@combo.DiscountTotal</h3>
+                                                            <input type="hidden" name="Id" value="@combo.ComboId" />
+                                                            <button class="btn btn-solid btn-xs" type="submit">buy this bundle</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            }
+                                        </div>
+                                    </div>                                    
+                                    <div class="load-more-sec">
+                                        <a href="javascript:void(0)" class="loadMore">
+                                            load
+                                            more
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section End -->

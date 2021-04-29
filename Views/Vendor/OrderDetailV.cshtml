@@ -1,0 +1,168 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_VendorLayout.cshtml";
+    double total = 0;
+    double shippingCharges = 0;
+    int orderId = 0;
+
+}
+
+@model OzEcommerceV14.Models.ViewModels.VendorViewModel.OrderDetailsViewModel
+<!--section start-->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Shipping Detail: </h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Shipping Address </th>
+                            <th scope="col">Customer Info </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>
+                                    @Model.ShippingDetail.Property <br />
+                                    @Model.ShippingDetail.StreetName <br />
+                                    @Model.ShippingDetail.City @Model.ShippingDetail.Postcode <br />
+                                    @Model.ShippingDetail.State @Model.ShippingDetail.Country
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @Model.CustomerDetail.FullName <br />
+                                    @Model.CustomerDetail.Email <br />
+                                    @Model.CustomerDetail.Phone
+                                </p>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+                <h4>Order Detail:</h4>
+
+                <table class="table cart-table table-responsive-xs">
+                    <thead>
+                        <tr class="table-head">
+                            <th scope="col">product name</th>
+                            <th scope="col">quantity</th>
+                            <th scope="col">total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model.OrderDetail)
+                        {
+                            shippingCharges = product.ShippingCharge;
+                            total += product.TotalPrice;
+                            orderId = product.OrderId;
+                            <tr>
+
+                                <td>
+                                    <a asp-controller="Product" asp-action="detail" asp-route-id="@product.ProductId">@product.ProductName</a><br />
+                                    @if (product.Size != null)
+                                    {
+                                        @product.Size<br />
+                                    }
+                                    @if (product.Color != null)
+                                    {
+                                        <ul class="color-variant"><li style="background-color: @product.Color"> </li></ul>}
+                                </td>
+                                <td>@product.Quantity</td>
+                                @if (product.OriginalTotal > product.TotalPrice)
+                                {
+                                    <td>@product.TotalPrice<del>@product.OriginalTotal</del></td>
+                                }
+                                else
+                                {
+                                    <td>@product.TotalPrice</td>
+
+                                }
+
+                            </tr>
+
+                        }
+                    </tbody>
+
+                </table>
+                <table class="table cart-table table-responsive-md">
+                    <tfoot>
+                        @if (shippingCharges != 0)
+                        {
+                            <tr>
+                                <td></td>
+                                <td>Shipping Charges :</td>
+                                <td>
+                                    <h2>$@shippingCharges</h2>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td></td>
+                            <td>total price :</td>
+                            <td>
+                                <h2>$@(total + shippingCharges)</h2>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <h4>Please Add/Edit Shipping Tracking Detail(If applicable):</h4>
+
+                <form method="post" asp-controller="Vendor" asp-action="AddTracking">
+
+                    <table class="table">
+                        <thead>
+                            <tr class="table-head">
+                                <th scope="col">Shipping company name</th>
+                                <th scope="col">Tracking no</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+
+                                @if (@Model.ShippingTracker != null)
+                                {
+                                    <td><input class="form-control col-xl-8 col-sm-7" id="companyName" name="companyName" type="text" value="@Model.ShippingTracker.CompanyName" required=""></td>
+                                    <td> <input class="form-control col-xl-8 col-sm-7" id="trackingNumber" name="trackingNumber" type="text" value="@Model.ShippingTracker.TrackingNumber" required=""></td>
+                                    <td>
+                                        <input class="form-control col-xl-8 col-sm-7" id="orderId" name="orderId" type="number" value="@orderId" required="" hidden>
+                                        <button type="submit" value="AddTracking" class="btn btn-primary">Edit</button>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td><input class="form-control col-xl-8 col-sm-7" id="companyName" name="companyName" type="text" required=""></td>
+                                    <td><input class="form-control col-xl-8 col-sm-7" id="trackingNumber" name="trackingNumber" type="text" required=""></td>
+                                    <td>
+                                        <input class="form-control col-xl-8 col-sm-7" id="orderId" name="orderId" type="number" value="@orderId" required="" hidden>
+                                        <button type="submit" value="AddTracking" class="btn btn-primary">Add</button>
+                                    </td>
+                                }
+
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="row cart-buttons">
+            <div class="col-6"><a asp-controller="Vendor" asp-action="SendCMessage" asp-route-id="@Model.OrderId" class="btn btn-classic">Message Buyer</a></div>
+
+            <div class="col-6"><a asp-controller="Vendor" asp-action="orderR" class="btn btn-classic">Back</a></div>
+        </div>
+    </div>
+</section>
+<!--section end-->

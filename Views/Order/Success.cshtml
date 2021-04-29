@@ -1,0 +1,101 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    double shippingCharge = 0;
+}
+@model OzEcommerceV14.Models.ViewModels.OrderViewModels.OrderSuccessViewModel
+<!-- thank-you section start -->
+<section class="section-b-space light-layout">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="success-text">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <h2>thank you</h2>
+                    <p>Payment is successfully processsed and your order is on the way</p>
+                    <p>Transaction ID:267676GHERT105467</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+<!-- order-detail section start -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-order">
+                    <h3>your order details</h3>
+                    @{
+                        double total = 0;
+                    }
+                    @foreach (var product in Model.OrderDetail)
+                    {
+                        shippingCharge = product.ShippingCharge;
+                        total += product.TotalPrice;
+                        <div class="row product-order-detail">
+                            <div class="col-3">
+                                <img src="~/images/pro3/1.jpg" alt="" class="img-fluid blur-up lazyload">
+                            </div>
+                            <div class="col-3 order_detail">
+                                <div>
+                                    <h4>product name</h4>
+                                    <h5>@product.ProductName</h5>
+                                </div>
+                            </div>
+                            <div class="col-3 order_detail">
+                                <div>
+                                    <h4>quantity</h4>
+                                    <h5>@product.Quantity</h5>
+                                </div>
+                            </div>
+                            <div class="col-3 order_detail">
+                                <div>
+                                    <h4>price</h4>
+                                    <h5>$@product.TotalPrice</h5>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="total-sec">
+                        <ul>
+                            <li>subtotal <span>$@total</span></li>
+                            <li>shipping <span>$@shippingCharge</span></li>
+                        </ul>
+                    </div>
+                    <div class="final-total">
+                        <h3>total <span>$@(total+shippingCharge)</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row order-success-sec">
+                    <div class="col-sm-6">
+                        <h4>summery</h4>
+                        <ul class="order-detail">
+
+                            <li>order ID: @Model.Order.Id</li>
+                            <li>Order Date: @Model.Order.DateCreation.Date.ToShortDateString()</li>
+                            <li>Order Total: $@(total+shippingCharge)</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>shipping address</h4>
+                        <ul class="order-detail">
+                            <li>@Model.Address.Property</li>
+                            <li>@Model.Address.StreetName</li>
+                            <li>@Model.Address.City @Model.Address.Country @Model.Address.Postcode</li>
+                            <li>Contact No. @Model.Account.Phone</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section ends -->
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,74 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<!-- breadcrumb start -->
+<partial name="../Shared/BreadCrumb" />
+
+
+<!-- breadcrumb End -->
+<!--section start-->
+<section class="login-page section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>@ViewData["Title"]</h3>
+                <div class="theme-card">
+                    <form class="theme-form" id="account" method="post">
+                        <div class="form-group">
+                            <label asp-for="Input.Email">Email</label>
+                            <input type="text" class="form-control" id="email" asp-for="Input.Email" placeholder="Email" required="">
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password">Password</label>
+                            <input asp-for="Input.Password" type="password" class="form-control" id="review"
+                                   placeholder="Enter your password" required="">
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-solid">Login</button>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </p>
+                            <p>
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 right-login">
+                <h3>New Customer</h3>
+                <div class="theme-card authentication-right">
+                    <h6 class="title-font">Create A Account</h6>
+                    <p>
+                        Registration is quick and easy. It allows you to be
+                        able to order from our shop. To start shopping click register.
+                    </p><a asp-area="Identity" asp-page="/Account/Register"
+                           class="btn btn-solid">Create an Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Section ends-->
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

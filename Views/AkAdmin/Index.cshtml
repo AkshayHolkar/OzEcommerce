@@ -1,0 +1,100 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_AdminLayout.cshtml";
+
+    double earning = ViewBag.TotalSell * 0.1;
+    double totalSell = ViewBag.TotalSell;
+}
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Dashboard
+                        <small>OzEcommerce Admin panel</small>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-4 col-md-6 xl-50">
+            <div class="card o-hidden widget-cards">
+                <div class="bg-warning card-body">
+                    <div class="media static-top-widget row">
+                        <div class="icons-widgets col-4">
+                            <div class="align-self-center text-center"><i data-feather="navigation"
+                                    class="font-warning"></i></div>
+                        </div>
+                        <div class="media-body col-8">
+                            <span class="m-0">Total Sell</span>
+                            <h3 class="mb-0">$ <span class="counter"> @totalSell </span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 xl-50">
+            <div class="card o-hidden  widget-cards">
+                <div class="bg-secondary card-body">
+                    <div class="media static-top-widget row">
+                        <div class="icons-widgets col-4">
+                            <div class="align-self-center text-center"><i data-feather="box" class="font-secondary"></i>
+                            </div>
+                        </div>
+                        <div class="media-body col-8">
+                            <span class="m-0">Total Seller</span>
+                            <h3 class="mb-0"> <span class="counter">@ViewBag.TotalVendor</span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 xl-50">
+            <div class="card o-hidden widget-cards">
+                <div class="bg-primary card-body">
+                    <div class="media static-top-widget row">
+                        <div class="icons-widgets col-4">
+                            <div class="align-self-center text-center"><i data-feather="message-square"
+                                    class="font-primary"></i></div>
+                        </div>
+                        <div class="media-body col-8">
+                            <span class="m-0">Total Customer</span>
+                            <h3 class="mb-0"><span class="counter">@ViewBag.TotalCustomer</span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6 xl-50">
+            <div class="card o-hidden widget-cards">
+                <div class="bg-primary card-body">
+                    <div class="media static-top-widget row">
+                        <div class="icons-widgets col-4">
+                            <div class="align-self-center text-center"><i data-feather="message-square"
+                                    class="font-primary"></i></div>
+                        </div>
+                        <div class="media-body col-8">
+                            <span class="m-0">Total Earning</span>
+                            <h3 class="mb-0"><span class="counter">@earning</span></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

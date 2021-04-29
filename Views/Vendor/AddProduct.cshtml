@@ -1,0 +1,229 @@
+﻿@{
+    Layout = "../Shared/_VendorLayout.cshtml";
+
+}
+
+@model OzEcommerceV14.Models.ViewModels.AddProductViewModel
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Add Products
+                        <small> Admin panel</small>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item active">Add Product</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="post" asp-controller="Vendor" asp-action="AddProduct" class="needs-validation add-product-form" novalidate="" enctype="multipart/form-data"> 
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Add Product</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row product-adding">
+                            <div class="col-xl-5">
+                        <div class="add-product">
+                            <div class="row">
+                                <div class="col-xl-9 xl-50 col-sm-6 col-3">
+                                    <ul >
+                                        <li><label>Please add Feture image here</label></li>
+                                            <li><div class="box-input-file"><input asp-for="fImage" class="upload" onchange="document.getElementById('Fimage').src = window.URL.createObjectURL(this.files[0])"  type="file" ><i class="fa fa-plus"></i></div></li>
+                                            <li><img id="Fimage" class="img-thumbnail" /></li>
+                                            <li><label>Please add Other images here</label></li>
+                                            <li><div class="box-input-file"><input asp-for="images" class="upload" onchange="document.getElementById('1').src = window.URL.createObjectURL(this.files[0])" type="file" ><i class="fa fa-plus"></i></div></li>
+                                            <li><img id="1" class="img-thumbnail" /></li>
+                                            <li><div class="box-input-file"><input asp-for="images" class="upload" onchange="document.getElementById('2').src = window.URL.createObjectURL(this.files[0])" type="file"><i class="fa fa-plus"></i></div></li>
+                                            <li><img id="2" class="img-thumbnail" /></li>
+                                            <li><div class="box-input-file"><input asp-for="images" class="upload" onchange="document.getElementById('3').src = window.URL.createObjectURL(this.files[0])" type="file"><i class="fa fa-plus"></i></div></li>
+                                            <li><img id="3" class="img-thumbnail" /></li>
+                                            <li><div class="box-input-file"><input asp-for="images" class="upload" onchange="document.getElementById('4').src = window.URL.createObjectURL(this.files[0])" type="file"><i class="fa fa-plus"></i></div></li>
+                                            <li><img id="4" class="img-thumbnail" /></li>
+                                            <li><div class="box-input-file"><input asp-for="images" class="upload" onchange="document.getElementById('5').src = window.URL.createObjectURL(this.files[0])" type="file"><i class="fa fa-plus"></i></div></li>
+                                            <li><img id="5" class="img-thumbnail" /></li> 
+                                        <li><label>Add YouTube Embed video link(Add only link which is in src)</label></li>
+                                        <li>
+                                            <input asp-for="ProductVideo" class="form-control col-xl-8 col-sm-7" id="ProductVideo" type="text" required="">
+                                        </li>
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                            <div class="col-xl-12">
+
+                                <div class="form">
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustom01" class="col-xl-3 col-sm-4 mb-0">Title :</label>
+                                        <input asp-for="product.Name" class="form-control col-xl-8 col-sm-7" id="validationCustom01" type="text" required="">
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustom02" class="col-xl-3 col-sm-4 mb-0">Price :</label>
+                                        <input asp-for="product.Price" class="form-control col-xl-8 col-sm-7" id="validationCustom02" type="number" min="1" required="">
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Shipping Charges:</label>
+                                        <input asp-for="shippingDetail.ShippingCharges" class="form-control col-xl-8 col-sm-7" id="shippingCharges" type="number" min="0" required="">
+                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Looks good!</div>
+                                    </div>
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Free Shipping:</label>
+                                        <input asp-for="shippingDetail.IsFree" type="checkbox"><span>(Please check box if it is free shipping)</span>
+
+                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Looks good!</div>
+                                    </div>
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Available Size:</label>
+                                        <input asp-for="product.SizeNotApplicable" type="checkbox"> <span>Not Applicable</span>&nbsp;&nbsp;&nbsp;
+                                        @foreach (var size in Model.ProductSize)
+                                        {
+                                            <input name="size" value="@size.Name" type="checkbox"> <span>@size.Name  &nbsp;&nbsp;&nbsp;</span>
+
+                                        }
+                                        @*<input asp-for="Size.XS" type="checkbox"> <span>XS</span>&nbsp;&nbsp;&nbsp;
+                                        <input asp-for="Size.S" type="checkbox"> <span>S</span>&nbsp;&nbsp;&nbsp;
+                                        <input asp-for="Size.M" type="checkbox"> <span>M</span>&nbsp;&nbsp;&nbsp;
+                                        <input asp-for="Size.L" type="checkbox"> <span>L</span>&nbsp;&nbsp;&nbsp;
+                                        <input asp-for="Size.XL" type="checkbox"> <span>XL</span>&nbsp;&nbsp;&nbsp;
+                                        <input asp-for="Size.XXL" type="checkbox"> <span>XXL</span>*@
+
+
+                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Looks good!</div>
+                                    </div>
+                                    <div class="form-group mb-3 row">
+                                            <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Available Colours:</label>
+                                       
+                                            <input asp-for="product.ColorNotApplicable" type="checkbox"> <span>Not Applicable</span>&nbsp;&nbsp;&nbsp;
+
+                                            <table class="table col-xl-3 col-sm-4 mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Add</th>
+                                                        <th>Pick Color</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @*@foreach(var i in Model.NumberOfColors)
+                                                    {
+                                                        <tr>
+                                                            <td><input name="add" value="" type="checkbox"></td>
+                                                            <td>Color @i:<input name="color" value="" data-jscolor=""></td>
+                                                        </tr>
+                                                    }*@
+                                                    <tr>
+            <td><input asp-for="AddColor1"  type="checkbox"></td>
+            <td>Color 1:<input asp-for="Color1" data-jscolor=""></td>
+        </tr>
+        <tr>
+            <td><input asp-for="AddColor2"  type="checkbox"></td>
+            <td>Color 2:<input asp-for="Color2" data-jscolor=""></td>
+        </tr>
+        <tr>
+            <td><input asp-for="AddColor3"  type="checkbox"></td>
+            <td>Color 3:<input asp-for="Color3" data-jscolor=""></td>
+        </tr>
+
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                               
+                                <div class="form-group row">
+                                    <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">Category:</label>
+                                    <select asp-for="product.CategoryId"
+                                            asp-items="Model.Categories" class="form-control digits col-xl-8 col-sm-7">
+                                        @*<option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>Extra Large</option>*@
+                                    </select>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">LifeStyle Category:</label>
+                                    <select asp-for="product.LifeStyleCategoryId"
+                                            asp-items="Model.ComboCategories" class="form-control digits col-xl-8 col-sm-7">
+                                        @*<option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>Extra Large</option>*@
+                                    </select>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-sm-4 mb-0">Total Products :</label>
+                                    <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
+                                        <div class="input-group">
+                                            <input asp-for="product.Quantity" class="touchspin" type="text" value="1">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-sm-4 mb-0">Warranty(In months) :</label>
+                                    <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
+                                        <div class="input-group">
+                                            <input asp-for="WarrantyPeriod" class="touchspin" type="text" value="1">
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-sm-4 mb-0">Provide Discount In case of Combo Purchase (In %):</label>
+                                    <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
+                                        <div class="input-group">
+                                            <input asp-for="DiscountOnCombo" id="discountOnCombo" class="touchspin" type="text" maxlength="10" value="1">
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-sm-4 mb-0">Provide Discount In case Purchasing more than one Product (In %):</label>
+                                    <fieldset class="qty-box col-xl-9 col-xl-8 col-sm-7 pl-0">
+                                        <div class="input-group">
+                                            <input asp-for="DiscontOnMulti" id="discontOnMulti" class="touchspin" type="text" value="1">
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-sm-4">Add Description :</label>
+                                    <div class="col-xl-8 col-sm-7 pl-0 description-sm">
+                                        <textarea asp-for="product.Description" class="form-control" cols="10" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="offset-xl-3 offset-sm-4">
+                                    <button type="submit" value="AddProduct" class="btn btn-primary">ADD</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        </div>
+    </div>
+    
+    <!-- Container-fluid Ends-->
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

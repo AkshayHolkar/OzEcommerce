@@ -1,0 +1,200 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multikart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin , OzEcommerce admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="~/images/dashboard/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="~/images/dashboard/favicon.png" type="image/x-icon">
+    <title>OzEcommerce Admin</title>
+
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Font Awesome-->
+    <link rel="stylesheet" type="text/css" href="~/css/fontawesome.css">
+
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="~/css/flag-icon.css">
+
+    <!-- Datatable css-->
+    <link rel="stylesheet" type="text/css" href="~/css/datatables.css">
+
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="~/css/icofont.css">
+
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href="~/css/themify-icons.css">
+
+    <!-- Prism css-->
+    <link rel="stylesheet" type="text/css" href="~/css/prism.css">
+
+    <!-- Chartist css -->
+    <link rel="stylesheet" type="text/css" href="~/css/chartist.css">
+
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css">
+
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="~/css/admin.css">
+</head>
+<body>
+    <!-- page-wrapper Start-->
+    <div class="page-wrapper">
+        <!-- Page Header Start-->
+        <div class="page-main-header">
+            <div class="main-header-right row">
+                <div class="main-header-left d-lg-none">
+                    <h2>OzEcommerce</h2>
+                </div>
+                <div class="mobile-sidebar">
+                    <div class="media-body text-right switch-sm">
+                        <label class="switch"><a href="#"><i id="sidebar-toggle" data-feather="align-left"></i></a></label>
+                    </div>
+                </div>
+                <div class="nav-right col">
+                    <ul class="nav-menus">
+                        <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize-2"></i></a></li>
+                    </ul>
+                    <div class="d-lg-none mobile-toggle pull-right"><i data-feather="more-horizontal"></i></div>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header Ends -->
+        <!-- Page Body Start-->
+        <div class="page-body-wrapper">
+            <!-- Page Sidebar Start-->
+            <div class="page-sidebar">
+
+                <ul class="sidebar-menu">
+                    <li><a class="sidebar-header" asp-area="" asp-controller="Home" asp-action="Index"><i data-feather="home"></i><span>Back to site</span></a></li>
+                    <li><a class="sidebar-header" asp-area="" asp-controller="AkAdmin" asp-action="Index"><i data-feather="archive"></i><span>Dashboard</span></a></li>
+                    <li><a class="sidebar-header" asp-area="" asp-controller="AkAdmin" asp-action="VendorList"><i data-feather="users"></i><span>Vendors</span></a></li>
+
+                    <li>
+                        <a class="sidebar-header" href="#"><i data-feather="box"></i> <span>Products</span><i class="fa fa-angle-right pull-right"></i></a>
+                        <ul class="sidebar-submenu">
+                            <li><a asp-area="" asp-controller="Vendor" asp-action="ProductView"><i class="fa fa-circle"></i>Product List</a></li>
+                            <li><a asp-area="" asp-controller="Vendor" asp-action="AddProduct"><i class="fa fa-circle"></i>Add Product</a></li>
+                            <li><a asp-area="" asp-controller="Vendor" asp-action="AddRecommendation"><i class="fa fa-circle"></i>Add Combo Recommendation</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="sidebar-header" asp-area="" asp-controller="Vendor" asp-action="OrderR"><i data-feather="dollar-sign"></i><span>Orders</span></a></li>
+
+                    <li><a class="sidebar-header" asp-area="" asp-controller="Vendor" asp-action="Message"><i data-feather="mail"></i><span>Messages</span></a></li>
+                    <li>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="sidebar-header"><i data-feather="log-in"></i><span>Logout</span></button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="page-body">
+                @RenderBody()
+            </div>
+            <!-- footer start-->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 footer-copyright">
+                            <p class="mb-0">Copyright 2019 © OzEcommerce All rights reserved.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="pull-right mb-0">Hand crafted & made with<i class="fa fa-heart"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- footer end-->
+        </div>
+    </div>
+
+    <!-- latest jquery-->
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+
+    <!-- Bootstrap js-->
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+
+    <!-- feather icon js-->
+    <script src="~/js/icons/feather-icon/feather.min.js"></script>
+    <script src="~/js/icons/feather-icon/feather-icon.js"></script>
+
+    <!-- Sidebar jquery-->
+    <script src="~/js/sidebar-menu.js"></script>
+
+    <!-- touchspin js-->
+    <script src="~/js/touchspin/vendors.min.js"></script>
+    <script src="~/js/touchspin/touchspin.js"></script>
+    <script src="~/js/touchspin/input-groups.min.js"></script>
+
+    <!-- form validation js-->
+    <script src="~/js/dashboard/form-validation-custom.js"></script>
+
+    <!-- Datatables js-->
+    <script src="../assets/js/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatables/custom-basic.js"></script>
+
+    <!-- Zoom js-->
+    <script src="~/js/jquery.elevatezoom.js"></script>
+    <script src="~/js/zoom-scripts.js"></script>
+
+    <!--Customizer admin-->
+    <script src="~/js/admin-customizer.js"></script>
+
+    <!--chartist js-->
+    <script src="~/js/chart/chartist/chartist.js"></script>
+
+    <!--chartjs js-->
+    <script src="~/js/chart/chartjs/chart.min.js"></script>
+
+    <!-- lazyload js-->
+    <script src="~/js/lazysizes.min.js"></script>
+
+    <!--copycode js-->
+    <script src="~/js/prism/prism.min.js"></script>
+    <script src="~/js/clipboard/clipboard.min.js"></script>
+    <script src="~/js/custom-card/custom-card.js"></script>
+
+    <!--counter js-->
+    <script src="~/js/counter/jquery.waypoints.min.js"></script>
+    <script src="~/js/counter/jquery.counterup.min.js"></script>
+    <script src="~/js/counter/counter-custom.js"></script>
+
+    <!--peity chart js-->
+    <script src="~/js/chart/peity-chart/peity.jquery.js"></script>
+
+    <!--sparkline chart js-->
+    <script src="~/js/chart/sparkline/sparkline.js"></script>
+
+    <!--Customizer admin-->
+    <script src="~/js/admin-customizer.js"></script>
+
+    <!--dashboard custom js-->
+    <script src="~/js/dashboard/default.js"></script>
+
+    <!--right sidebar js-->
+    <script src="~/js/chat-menu.js"></script>
+
+    <!--height equal js-->
+    <script src="~/js/height-equal.js"></script>
+
+    <!-- lazyload js-->
+    <script src="~/js/lazysizes.min.js"></script>
+
+    <!--script admin-->
+    <script src="~/js/admin-script.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

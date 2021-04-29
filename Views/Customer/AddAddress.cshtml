@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "../Shared/_CustomerLayout.cshtml";
+}
+
+@model OzEcommerceV14.Models.Address
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Add Shipping Address
+                        <small> Customer panel</small>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+
+                    <li class="breadcrumb-item active">Address</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="post" asp-controller="Customer" asp-action="AddAddress"
+                class="needs-validation add-product-form" novalidate="" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Add your Detail</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row product-adding">
+                            <div class="col-xl-12">
+                                <div class="form">
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustom01" class="col-xl-3 col-sm-4 mb-0">Unit no./Block
+                                            no.: </label>
+                                        <input asp-for="Property" class="form-control col-xl-8 col-sm-7" id="Property"
+                                            type="text" required="">
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustom01" class="col-xl-3 col-sm-4 mb-0">Street Name
+                                            :</label>
+                                        <input asp-for="StreetName" class="form-control col-xl-8 col-sm-7"
+                                            id="StreetName" type="text" required="">
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustomUsername" class="col-xl-3 col-sm-4 mb-0">Suburb
+                                            Name/City name:</label>
+                                        <input asp-for="City" class="form-control col-xl-8 col-sm-7" id="City"
+                                            type="text" required="">
+                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Looks good!</div>
+                                    </div>
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustomUsername"
+                                            class="col-xl-3 col-sm-4 mb-0">State:</label>
+                                        <input asp-for="State" class="form-control col-xl-8 col-sm-7" id="City"
+                                            type="text" required="">
+                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Looks good!</div>
+                                    </div>
+                                    <div class="form-group mb-3 row">
+                                        <label for="validationCustomUsername"
+                                            class="col-xl-3 col-sm-4 mb-0">PostCode:</label>
+                                        <input asp-for="Postcode" class="form-control col-xl-8 col-sm-7" id="Postcode"
+                                            type="text" required="">
+
+                                        <div class="invalid-feedback offset-sm-4 offset-xl-3">Looks good!</div>
+                                    </div>
+                                </div>
+                                <div class="offset-xl-3 offset-sm-4">
+                                    <button type="submit" value="AddAddress" class="btn btn-primary">ADD</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Container-fluid Ends-->
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

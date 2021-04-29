@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_CustomerLayout.cshtml";
+}
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Give Review
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item active">Give Review</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table cart-table">
+                <thead>
+                    <tr class="table-head">
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                @foreach (var product in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a asp-controller="product" asp-action="detail" asp-route-id="@product.ProductId"><img
+                                    src="~/productimages/@product.Photo" width="50" height="50" alt=""></a>
+                            </td>
+                            <td><a asp-controller="product" asp-action="detail"
+                                asp-route-id="@product.ProductId">@product.ProductName</a></td>
+                            <td><a class="btn btn-classic" asp-controller="Customer" asp-action="AddReview"
+                                asp-route-id="@product.ProductId">Add Review</a></td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>

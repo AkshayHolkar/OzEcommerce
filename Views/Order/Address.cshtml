@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Confirm Address";
+}
+
+@model OzEcommerceV14.Models.Address
+<!-- section start -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="checkout-page">
+            <div class="checkout-form">
+                <form method="post" asp-controller="Order" asp-action="Address"
+                    class="needs-validation add-product-form" novalidate="" enctype="multipart/form-data">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-sm-12 col-xs-12">
+                            <div class="checkout-title">
+                                <h3>Shipping Address</h3>
+                            </div>
+                            <div class="row check-out">
+
+                                @if (Model != null)
+                                {
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Country</div>
+                                        <input asp-for="Country" type="text" name="Country" id="Country" value="Australia"
+                                        placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Address line 1</div>
+                                        <input asp-for="Property" type="text" name="Property" id="Property"
+                                        value="@Model.Property"
+                                        placeholder="Apartment, Unit, Street, Block number/name">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Address line 2</div>
+                                        <input asp-for="StreetName" type="text" name="StreetName" id="StreetName"
+                                        value="@Model.StreetName" placeholder="Street Name">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Town/City</div>
+                                        <input asp-for="City" type="text" name="City" id="City" value="@Model.City"
+                                        placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                        <div class="field-label">State </div>
+                                        <input asp-for="State" type="text" name="State" id="State" value="@Model.State"
+                                        placeholder="">
+                                    </div>
+
+                                    <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                        <div class="field-label">Postal Code</div>
+                                        <input asp-for="Postcode" type="text" name="Postcode" id="Postcode"
+                                        value="@Model.Postcode" placeholder="">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Country</div>
+                                        <input asp-for="Country" type="text" name="Country" id="Country" value="Australia"
+                                        placeholder="">
+
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Address line 1</div>
+                                        <input asp-for="Property" type="text" name="Property" id="Property" value=""
+                                        placeholder="Apartment, Unit, Street, Block number/name">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Address line 2</div>
+                                        <input asp-for="StreetName" type="text" name="StreetName" id="StreetName" value=""
+                                        placeholder="Street Name">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Town/City</div>
+                                        <input asp-for="City" type="text" name="City" id="City" value="" placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                        <div class="field-label">State </div>
+                                        <input asp-for="State" type="text" name="State" id="State" value="" placeholder="">
+                                    </div>
+
+                                    <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                        <div class="field-label">Postal Code</div>
+                                        <input asp-for="Postcode" type="text" name="Postcode" id="Postcode" value=""
+                                        placeholder="">
+                                    </div>
+                                }
+                                <button type="submit" value="Address" class="btn btn-solid">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- section end -->
+<!-- Container-fluid Ends-->
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,66 @@
+﻿<ul class="show-div shopping-cart">
+    @{ var total = 0;
+
+        int count = 0;
+
+        foreach(var c in ViewBag.carts) { count++; }
+
+        bool IsCombo = count > 1;
+    }
+
+    @foreach (var cart in ViewBag.carts)
+    {
+        double totalPrice;
+        @if (IsCombo || cart.Quantity > 1)
+        {
+            if (IsCombo)
+            {
+                total += cart.ComboPrice * cart.Quantity;
+                totalPrice = cart.ComboPrice * cart.Quantity;         
+            }
+            else
+            {
+                total += cart.DiscountPrice * cart.Quantity;
+                totalPrice = cart.DiscountPrice * cart.Quantity;
+            }
+        }
+        else
+        {
+            total += cart.OriginalPrice;
+            totalPrice = cart.OriginalPrice;
+        }
+        <li>
+            <div class="media">
+                <a href="#">
+                    <img alt="" class="mr-3"
+                         src="~/productimages/@cart.Photo">
+                </a>
+                <div class="media-body">
+                    <a href="#">
+                        <h4>@cart.ProductName</h4>
+                    </a>
+                    <h4><span>@cart.Quantity x $ @totalPrice</span></h4>
+                </div>
+            </div>
+            <div class="close-circle">
+                <a href="#">
+                    <i class="fa fa-times"
+                       aria-hidden="true"></i>
+                </a>
+            </div>
+        </li>
+    }
+    <li>
+        <div class="total">
+            <h5>subtotal : <span>$@total</span></h5>
+        </div>
+    </li>
+    <li>
+        <div class="buttons">
+            <a asp-area="" asp-controller="Cart" asp-action="Index" class="view-cart">
+                view
+                cart
+            </a>
+        </div>
+    </li>
+</ul>

@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_CustomerLayout.cshtml";
+    double total = 0;
+    double shippingCharges = 0;
+}
+@model OzEcommerceV14.Models.ViewModels.CustomerViewModel.OrderDetailViewModel
+<!--section start-->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>Order Detail:</h4>
+                <table class="table cart-table table-responsive-xs">
+                    <thead>
+                        <tr class="table-head">
+                            <th scope="col">product name</th>
+                            <th scope="col">quantity</th>
+                            <th scope="col">total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model.OrderDetail)
+                        {
+                            shippingCharges = product.ShippingCharge;
+                            total += product.TotalPrice;
+                            <tr>
+                                <td><a asp-controller="Product" asp-action="detail"
+                                    asp-route-id="@product.ProductId">@product.ProductName</a><br />
+                                    @if (product.Size != null)
+                                    {
+                                        @product.Size<br />
+                                    }
+                                    @if (product.Color != null)
+                                    {
+                                        <ul class="color-variant">
+                                            <li style="background-color: @product.Color"> </li>
+                                        </ul>
+                                    }
+                                </td>
+                                <td>@product.Quantity</td>
+                                @if (product.OriginalTotal > product.TotalPrice)
+                                {
+                                    <td>@product.TotalPrice<del>@product.OriginalTotal</del></td>
+                                }
+                                else
+                                {
+                                    <td>@product.TotalPrice</td>
+
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <table class="table cart-table table-responsive-md">
+                    <tfoot>
+                        @if (shippingCharges != 0)
+                        {
+                            <tr>
+                                <td>Shipping Charges :</td>
+                                <td>
+                                    <h2>$@shippingCharges</h2>
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>total price :</td>
+                            <td>
+                                <h2>$@(total + shippingCharges)</h2>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <br />
+                @if (Model.TrackingNumber != null && Model.CompanyName != null)
+                {
+                    <h4>Shipping Detail: </h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Shipping company name</th>
+                                <th scope="col">Tracking no</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.CompanyName</td>
+                                <td>@Model.TrackingNumber</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+        <div class="row cart-buttons">
+            <div class="col-6"><a asp-controller="Customer" asp-action="SendMessage" asp-route-id="@Model.OrderId"
+                    class="btn btn-classic">Message Seller</a></div>
+            <div class="col-6"><a asp-controller="Customer" asp-action="order" class="btn btn-classic">Back</a></div>
+        </div>
+    </div>
+</section>
+<!--section end-->

@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "../Shared/_VendorLayout.cshtml";
+
+}
+
+@model OzEcommerceV14.Models.ViewModels.AddRecommendationViewModel
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Add Combo Recommendation
+                        <small> Admin panel</small>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                   
+                    <li class="breadcrumb-item active">Add Combo Recommendation </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <form method="post" asp-controller="Vendor" asp-action="AddRecommendation" class="needs-validation add-product-form" novalidate="" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Add Combo Recommendation </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row product-adding">
+                          
+                            <div class="col-xl-12">
+
+                               
+                                <div class="form">
+                                    <div class="form-group row">
+                                        <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">LifeStyle Category:</label>
+                                        <select asp-for="Recommendation.LifeStyleCategoryId"
+                                                asp-items="Model.Categories" class="form-control digits col-xl-8 col-sm-7">
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">Category:</label>
+                                        <select asp-for="Recommendation.ComboCategoryId"
+                                                asp-items="Model.NormalCategories" class="form-control digits col-xl-8 col-sm-7">
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">Product 1:</label>
+                                        <select asp-for="ProductId1"
+                                                asp-items="Model.productsList" class="form-control digits col-xl-8 col-sm-7">
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">Product 2:</label>
+                                        <select asp-for="ProductId2"
+                                                asp-items="Model.productsList" class="form-control digits col-xl-8 col-sm-7">
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">Product 3:</label>
+                                        <select asp-for="ProductId3"
+                                                asp-items="Model.optionalProductsList" class="form-control digits col-xl-8 col-sm-7">
+                                        </select>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">Product 4:</label>
+                                        <select asp-for="ProductId4"
+                                                asp-items="Model.optionalProductsList" class="form-control digits col-xl-8 col-sm-7">
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0 ">Product 5:</label>
+                                        <select asp-for="ProductId5"
+                                                asp-items="Model.optionalProductsList" class="form-control digits col-xl-8 col-sm-7">
+                                        </select>
+
+                                    </div>
+                                    <div class="offset-xl-3 offset-sm-4">
+                                        <button type="submit" value="AddRecommendation" class="btn btn-primary">Add Recommendation</button>
+                                        <button type="button" class="btn btn-light">Discard</button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Container-fluid Ends-->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

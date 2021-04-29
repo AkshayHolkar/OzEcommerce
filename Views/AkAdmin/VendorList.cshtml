@@ -1,0 +1,67 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_AdminLayout.cshtml";
+
+}
+@model OzEcommerceV14.Models.ViewModels.AdminViewModels.VendorListViewModel
+
+
+
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Vendor List
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item active">Vendor</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="card-body">
+                <div class="user-status table-responsive latest-order-table">
+                    <table class="table table-bordernone">
+                        <thead>
+                            <tr>
+                                <th scope="col">Store Name</th>
+                                <th scope="col">Products</th>
+                                @*<th scope="col">Account Created</th>*@
+                                <th scope="col">Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var vendor in Model.List)
+                            {
+                                <tr>
+                                    <td><a asp-controller="Product" asp-action="VendorProfile"
+                                        asp-route-id="@vendor.VendorId">@vendor.StoreName</a></td>
+                                    <td>@vendor.TotalProducts</td>
+                                    @*<td>@vendor.CreatedDate.ToShortDateString()</td>*@
+
+                                    <td>$@vendor.Revenue</td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

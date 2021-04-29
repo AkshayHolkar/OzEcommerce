@@ -1,0 +1,140 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "../Shared/_VendorLayout.cshtml";
+ 
+}
+@model OzEcommerceV14.Models.ViewModels.HomeViewModel
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="page-header-left">
+                    <h3>
+                        Product List
+                        <small>OzEcommerce Admin panel</small>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                   
+                    <li class="breadcrumb-item active">Product List</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+<!-- Container-fluid starts-->
+<h3>Products</h3>
+<div class="container-fluid">
+    <div class="row products-admin ratio_asos">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body product-box">
+                        <div class="img-wrapper">
+                            <div class="front">
+                                <a href="#"><img src="~/productimages/@product.MainImage" class="img-fluid blur-up lazyload bg-img" alt=""></a>
+                                <div class="product-hover">
+                                    <ul>
+                                        <li>
+                                            <a asp-area="" asp-controller="Vendor" asp-action="EditProduct" asp-route-id="@product.Product.Id">
+                                                <button class="btn" type="button" data-original-title="" title=""><i class="ti-pencil-alt"></i></button>
+                                                </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="" asp-controller="Vendor" asp-action="Delete" asp-route-id="@product.Product.Id">
+                                                <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalCenter" data-original-title="" title=""><i class="ti-trash"></i></button>
+                                                </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-detail">
+                            <div>
+                                @{double z = 5 - product.AvgRating;
+                                }
+
+                                @for (double i = 1; i <= product.AvgRating; i++)
+                                {
+                                    <i class="fa fa-star" style="color:orange"></i>
+
+                                }
+                                @for (double k = 1; k <= z; k++)
+                                {
+                                    <i class="fa fa-star"></i>
+
+                                }
+                            </div>
+                            <a href="#">
+                                <h6>@product.Product.Name</h6>
+                            </a>
+                            <h4>$@product.Product.Price </h4>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+    </div>
+</div>
+<h3>Combos</h3>
+<div class="container-fluid">
+    <div class="row products-admin ratio_asos">
+        @foreach (var comboSets in Model.Combo)
+        {
+            <div class="bundle">
+                <div class="bundle_img">
+                    @{
+                        int count = comboSets.Combo.Count();
+                    }
+                    @foreach (var product in comboSets.Combo)
+                    {
+                        <div class="img-box">
+                            <a asp-controller="product" asp-action="detail" asp-route-id="@product.ProductId">
+                                <img src="~/productimages/@product.Image" alt=""
+                                     class="img-fluid blur-up lazyload">
+                            </a>
+                        </div>
+
+                        count--;
+                       
+                        @if (count > 0) 
+                        {
+                        <span class="plus">+</span>
+                                    }
+                     }
+                </div>
+
+                <div class="bundle_detail">
+                    <div class="theme_checkbox">
+                       
+
+                        @foreach (var product in comboSets.Combo)
+                        {
+                            <label>
+                                @product.Name <span class="price_product">$@product.Price</span>
+
+                            </label>
+
+                        }
+
+                        <h4><del>$@comboSets.Total</del></h4>
+                        <h3>$@comboSets.DiscountTotal</h3>
+                        <a asp-area="" asp-controller="Vendor" asp-action="DeleteRcommentation" asp-route-id="@comboSets.ComboId" class="btn btn-solid btn-xs" style="color:red">Delete</a>
+                    </div>
+                </div>
+
+
+            </div>
+        }
+        </div>
+    </div>
+        <!-- Container-fluid Ends-->
